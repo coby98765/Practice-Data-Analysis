@@ -6,7 +6,7 @@ class Report:
         self.longest_3_tweets = dict()
         self.uppercase_words = dict()
 
-    def set_total_tweets(self, data,count):
+    def set_total_tweets(self,data,count):
         total_dict = dict()
         total_dict["antisemitic"] = data["1"]
         total_dict["non_antisemitic"] = data["0"]
@@ -15,28 +15,28 @@ class Report:
         total_dict["<unspecified>"] = count - sub_total
         self.total_tweets = total_dict
 
-    def set_average_length(self, antisemitic,non_antisemitic,total):
+    def set_average_length(self,antisemitic,non_antisemitic,total):
         average_len_dict = dict()
         average_len_dict["antisemitic"] = antisemitic
         average_len_dict["non_antisemitic"] = non_antisemitic
         average_len_dict["total"] = total
         self.average_length = average_len_dict
 
-    def set_common_words(self, antisemitic,non_antisemitic,total):
+    def set_common_words(self,antisemitic,non_antisemitic,total):
         common_words_dict = dict()
         common_words_dict["antisemitic"] = antisemitic
         common_words_dict["non_antisemitic"] = non_antisemitic
         common_words_dict["total"] = total
         self.common_words = common_words_dict
 
-    def set_longest_tweets(self, antisemitic,non_antisemitic,total):
+    def set_longest_tweets(self,antisemitic,non_antisemitic,total):
         longest_tweets_dict = dict()
         longest_tweets_dict["antisemitic"] = antisemitic
         longest_tweets_dict["non_antisemitic"] = non_antisemitic
         longest_tweets_dict["total"] = total
         self.longest_3_tweets = longest_tweets_dict
 
-    def set_uppercase_words(self, antisemitic,non_antisemitic,total):
+    def set_uppercase_words(self,antisemitic,non_antisemitic,total):
         uppercase_dict = dict()
         uppercase_dict["antisemitic"] = antisemitic
         uppercase_dict["non_antisemitic"] = non_antisemitic
