@@ -10,13 +10,14 @@ class DataAnalyzer:
 
     @staticmethod
     def split_df(df,val):
-        mask = df.where(df["Biased"]==val)
-        new_df = df[mask]
-        return new_df
+        filtered = df.where(df["Biased"]==val)
+        clean_df = filtered.dropna()
+        return clean_df
 
     def count_tweets(self):
-
-        pass
+        count_dict = self.df["Biased"].value_counts().to_dict()
+        count_dict["total"] = len(self.df)
+        return count_dict
 
     def tweets_len(self):
         pass
