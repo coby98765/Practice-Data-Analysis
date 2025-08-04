@@ -16,7 +16,7 @@ class FileHandler:
     # export report .json file
     @staticmethod
     def export_json(data):
-        file_path = f"results/results.json"
+        file_path = f"../results/results.json"
         # adjusting data keys to match JSON prot.
         print(f"Exporting JSON file: {file_path}...")
         try:

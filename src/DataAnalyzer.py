@@ -15,6 +15,7 @@ class DataAnalyzer:
     def count_tweets(self):
         count_dict = self.df["Biased"].value_counts().to_dict()
         count_dict["total"] = len(self.df)
+        print(count_dict)
         return count_dict
 
     def longest_tweets(self):

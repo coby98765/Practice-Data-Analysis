@@ -8,8 +8,8 @@ class Report:
 
     def set_total_tweets(self,data):
         total_dict = dict()
-        total_dict["antisemitic"] = data["1"]
-        total_dict["non_antisemitic"] = data["0"]
+        total_dict["antisemitic"] = data[1]
+        total_dict["non_antisemitic"] = data[0]
         total_dict["total"] = data["total"]
         sub_total = total_dict["antisemitic"] + total_dict["non_antisemitic"]
         total_dict["<unspecified>"] =  data["total"] - sub_total
