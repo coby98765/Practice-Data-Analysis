@@ -52,7 +52,17 @@ class DataAnalyzer:
 
 
     def caps_word_count(self):
-        pass
+        upper_dict = dict()
+        antisemitic_texts = " ".join(self.df_antisemitic.Text)
+        antisemitic_upper_list = [word for word in " ".join(antisemitic_texts) if word.isupper()]
+        upper_dict["antisemitic"] = len(antisemitic_upper_list)
+        non_antisemitic_texts = " ".join(self.df_non_antisemitic.Text)
+        non_antisemitic_upper_list = [word for word in " ".join(non_antisemitic_texts) if word.isupper()]
+        upper_dict["non_antisemitic"] = len(non_antisemitic_upper_list)
+        total_texts = " ".join(self.df.Text)
+        total_upper_list = [word for word in " ".join(total_texts) if word.isupper()]
+        upper_dict["total"] = len(total_upper_list)
+        return upper_dict
 
     @staticmethod
     def _longest_text_in_df(df):
