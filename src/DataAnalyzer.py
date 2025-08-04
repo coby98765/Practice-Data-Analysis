@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 class DataAnalyzer:
     def __init__(self,df):
@@ -24,7 +25,31 @@ class DataAnalyzer:
         return len_dict
 
     def most_popular_words(self):
-        pass
+        popular_dict = dict()
+        #antisemitic
+        antisemitic_texts = " ".join(self.df_antisemitic.Text).lower()
+        # clean text
+        antisemitic_clean_text = DataAnalyzer.clean_text(antisemitic_texts)
+        # get most popular words list
+        popular_dict["antisemitic"] = DataAnalyzer.find_popular_words(antisemitic_clean_text)
+
+        #non_antisemitic
+        non_antisemitic_texts = " ".join(self.df_non_antisemitic.Text).lower()
+        # clean text
+        non_antisemitic_clean_text = DataAnalyzer.clean_text(non_antisemitic_texts)
+        # get most popular words list
+        popular_dict["non_antisemitic"] = DataAnalyzer.find_popular_words(non_antisemitic_clean_text)
+
+        #total
+        total_texts = " ".join(self.df.Text).lower()
+        #clean text
+        total_clean_text = DataAnalyzer.clean_text(total_texts)
+        #get most popular words list
+        popular_dict["total"] = DataAnalyzer.find_popular_words(total_clean_text)
+
+        return popular_dict
+
+
 
     def caps_word_count(self):
         pass
@@ -35,3 +60,27 @@ class DataAnalyzer:
                                    ascending=False,
                                    key=lambda msg: msg.str.len())
         return sorted_df[:3].to_dict(orient="index")
+
+    @staticmethod
+    def clean_text(text):
+        keyword = "https://t.co/"
+        splited_text = text.split()
+        for i in range(len(splited_text)):
+            if keyword in splited_text[i]:
+                splited_text[i] = ""
+        joined_text = " ".join(splited_text)
+        clean_text = re.sub(r'[^A-Za-z0-9 ]+', " ", joined_text)
+        return clean_text
+
+    @staticmethod
+    def find_popular_words(text):
+        wordcount = dict()
+        for word in text.split():
+            if word not in wordcount:
+                wordcount[word] = 1
+            else:
+                wordcount[word] += 1
+        sorted_words = {k: v for k, v in sorted(wordcount.items(), key=lambda item: item[1])}
+        sorted_keys = list(sorted_words.keys())
+        return sorted_keys[-10:]
+
