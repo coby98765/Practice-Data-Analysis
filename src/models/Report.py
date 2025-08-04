@@ -6,13 +6,13 @@ class Report:
         self.longest_3_tweets = dict()
         self.uppercase_words = dict()
 
-    def set_total_tweets(self,data,count):
+    def set_total_tweets(self,data):
         total_dict = dict()
         total_dict["antisemitic"] = data["1"]
         total_dict["non_antisemitic"] = data["0"]
-        total_dict["total"] = count
+        total_dict["total"] = data["total"]
         sub_total = total_dict["antisemitic"] + total_dict["non_antisemitic"]
-        total_dict["<unspecified>"] = count - sub_total
+        total_dict["<unspecified>"] =  data["total"] - sub_total
         self.total_tweets = total_dict
 
     def set_average_length(self,antisemitic,non_antisemitic,total):
@@ -22,11 +22,11 @@ class Report:
         average_len_dict["total"] = total
         self.average_length = average_len_dict
 
-    def set_common_words(self,antisemitic,non_antisemitic,total):
+    def set_common_words(self,data):
         common_words_dict = dict()
-        common_words_dict["antisemitic"] = antisemitic
-        common_words_dict["non_antisemitic"] = non_antisemitic
-        common_words_dict["total"] = total
+        common_words_dict["antisemitic"] = data["antisemitic"]
+        common_words_dict["non_antisemitic"] = data["non_antisemitic"]
+        common_words_dict["total"] = data["total"]
         self.common_words = common_words_dict
 
     def set_longest_tweets(self,antisemitic,non_antisemitic,total):
@@ -36,11 +36,11 @@ class Report:
         longest_tweets_dict["total"] = total
         self.longest_3_tweets = longest_tweets_dict
 
-    def set_uppercase_words(self,antisemitic,non_antisemitic,total):
+    def set_uppercase_words(self,data):
         uppercase_dict = dict()
-        uppercase_dict["antisemitic"] = antisemitic
-        uppercase_dict["non_antisemitic"] = non_antisemitic
-        uppercase_dict["total"] = total
+        uppercase_dict["antisemitic"] = data["antisemitic"]
+        uppercase_dict["non_antisemitic"] = data["non_antisemitic"]
+        uppercase_dict["total"] = data["total"]
         self.uppercase_words = uppercase_dict
 
     def to_dict(self):
